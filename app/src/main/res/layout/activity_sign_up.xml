@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#fff"
+        android:padding="20dp">
+
+        <ImageView
+            android:id="@+id/logoImage"
+            android:layout_width="150dp"
+            android:transitionName="logo_image"
+            android:src="@drawable/logo2"
+            android:layout_height="100dp"/>
+
+        <TextView
+            android:id="@+id/logoName"
+            android:layout_width="wrap_content"
+            android:text="Welcome"
+            android:layout_gravity="center"
+            android:layout_marginTop="-20dp"
+            android:textSize="40sp"
+            android:fontFamily="@font/bangers"
+            android:textColor="#000"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/sloganName"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:text="Sign Up to create an Account"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:fontFamily="@font/antic"
+            android:layout_height="wrap_content"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:padding="20dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/name"
+                app:startIconDrawable="@drawable/ic_baseline_create_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Full Name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:inputType="text"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/phoneNo"
+                app:startIconDrawable="@drawable/ic_baseline_person_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Phone Number">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/email"
+                app:startIconDrawable="@drawable/ic_baseline_email_24"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/password"
+                app:startIconDrawable="@drawable/ic_baseline_lock_24"
+                app:passwordToggleEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Password">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Button
+                android:id="@+id/register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="5dp"
+                android:background="#000"
+                android:text="CREATE ACCOUNT"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/Login"
+                android:layout_width="match_parent"
+                android:text="Already have an Account? Login"
+                android:textColor="#000"
+                android:gravity="center"
+                android:layout_margin="15dp"
+                android:layout_height="wrap_content"/>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:id="@+id/progressBar"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                tools:ignore="Missing Constraints"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
