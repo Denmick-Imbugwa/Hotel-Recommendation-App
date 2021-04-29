@@ -46,11 +46,10 @@ public class Login extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login.this, MainActivity2.class);
-                startActivity(intent);
                 SignUp();
             }
         });
+
 
     }
 
@@ -89,7 +88,6 @@ public class Login extends AppCompatActivity {
         }
         else {
             isUser();
-
         }
     }
 
@@ -98,7 +96,7 @@ public class Login extends AppCompatActivity {
         final String userEnteredPassword = regPassword.getEditText().getText().toString().trim();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUser = reference.orderByChild("username").equalTo(userEnteredUsername);
+        Query checkUser = reference.orderByChild("name").equalTo(userEnteredUsername);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -119,7 +117,6 @@ public class Login extends AppCompatActivity {
                         String phoneNoFromDB = snapshot.child(userEnteredUsername).child("phoneNo").getValue(String.class);
                         String emailFromDB = snapshot.child(userEnteredUsername).child("email").getValue(String.class);
 
-                        Toast.makeText(Login.this, nameFromDB+"\n"+emailFromDB+"\n"+phoneNoFromDB, Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(getApplicationContext(), SignUp.class);
                         intent.putExtra("name", nameFromDB);
@@ -127,7 +124,7 @@ public class Login extends AppCompatActivity {
                         intent.putExtra("phoneNo", phoneNoFromDB);
                         intent.putExtra("password", passwordFromDB);
 
-                        startActivity(intent);
+
 
                     }
                     else {
@@ -139,11 +136,15 @@ public class Login extends AppCompatActivity {
                     regUsername.setError("No such User exists");
                     regUsername.requestFocus();
                 }
+
+                Intent intent = new Intent(Login.this, MainActivity2.class);
+                startActivity(intent);
+                Toast.makeText(Login.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
 
             }
         });

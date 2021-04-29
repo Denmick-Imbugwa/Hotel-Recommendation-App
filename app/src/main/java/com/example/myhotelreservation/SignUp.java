@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -53,8 +54,7 @@ public class SignUp extends AppCompatActivity {
         regRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(SignUp.this, Login.class);
-                startActivity(intent);
+
 
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("users");
@@ -70,6 +70,7 @@ public class SignUp extends AppCompatActivity {
 
                 UserHelperClass helperClass = new UserHelperClass(name,phoneNo,email,password);
                 reference.child(phoneNo).setValue(helperClass);
+
 
             }
         });                                  
@@ -164,6 +165,10 @@ public class SignUp extends AppCompatActivity {
 
         UserHelperClass helperClass = new UserHelperClass(name,phoneNo,email,password);
         reference.child(phoneNo).setValue(helperClass);
+
+        Intent intent = new Intent(SignUp.this, Login.class);
+        startActivity(intent);
+        Toast.makeText(this, "User Registered Successfully!", Toast.LENGTH_SHORT).show();
     }
 
 
