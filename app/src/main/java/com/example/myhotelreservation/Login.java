@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Login extends AppCompatActivity {
 
     Button Login;
-    TextInputLayout regUsername, regPassword;
+    TextInputLayout username, password;
     TextView register;
 
     @Override
@@ -32,8 +32,8 @@ public class Login extends AppCompatActivity {
 
         register = findViewById(R.id.register);
         Login = findViewById(R.id.Login);
-        regPassword = findViewById(R.id.password);
-        regUsername = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        username = findViewById(R.id.username);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,33 +50,32 @@ public class Login extends AppCompatActivity {
             }
         });
 
-
     }
 
 
     private Boolean validateUsername(){
-        String val = regUsername.getEditText().getText().toString().trim();
+        String val = username.getEditText().getText().toString();
 
         if (val.isEmpty()){
-            regUsername.setError("Field cannot be empty");
+            username.setError("Field cannot be empty");
             return false;
         }
         else {
-            regUsername.setError(null);
-            regUsername.setErrorEnabled(false);
+            username.setError(null);
+            username.setErrorEnabled(false);
             return true;
         }
     }
     private Boolean validatePassword(){
-        String val = regPassword.getEditText().getText().toString().trim();
+        String val = password.getEditText().getText().toString().trim();
 
         if (val.isEmpty()){
-            regPassword.setError("Field Cannot be empty");
+            password.setError("Field Cannot be empty");
             return false;
         }
         else {
-            regPassword.setError(null);
-            regPassword.setErrorEnabled(false);
+            password.setError(null);
+            password.setErrorEnabled(false);
             return true;
         }
     }
@@ -88,59 +87,55 @@ public class Login extends AppCompatActivity {
         }
         else {
             isUser();
+
+
         }
     }
 
     private void isUser() {
-        final String userEnteredUsername = regUsername.getEditText().getText().toString().trim();
-        final String userEnteredPassword = regPassword.getEditText().getText().toString().trim();
+        final String userEnteredUsername = username.getEditText().getText().toString().trim();
+        final String userEnteredPassword = password.getEditText().getText().toString().trim();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUser = reference.orderByChild("name").equalTo(userEnteredUsername);
+        Query checkUser = reference.orderByChild("phoneNo").equalTo(userEnteredUsername);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 if(snapshot.exists()){
 
-                    regUsername.setError(null);
-                    regUsername.setErrorEnabled(false);
-
+                    username.setError(null);
+                    username.setErrorEnabled(false);
 
                     String passwordFromDB = snapshot.child(userEnteredUsername).child("password").getValue(String.class);
                     if(passwordFromDB.equals(userEnteredPassword)){
 
-                        regPassword.setError(null);
-                        regPassword.setErrorEnabled(false);
+                        username.setError(null);
+                        username.setErrorEnabled(false);
 
                         String nameFromDB = snapshot.child(userEnteredUsername).child("name").getValue(String.class);
                         String phoneNoFromDB = snapshot.child(userEnteredUsername).child("phoneNo").getValue(String.class);
                         String emailFromDB = snapshot.child(userEnteredUsername).child("email").getValue(String.class);
 
-
-                        Intent intent = new Intent(getApplicationContext(), SignUp.class);
+                        Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
                         intent.putExtra("name", nameFromDB);
                         intent.putExtra("email", emailFromDB);
                         intent.putExtra("phoneNo", phoneNoFromDB);
                         intent.putExtra("password", passwordFromDB);
 
-
+                        startActivity(intent);
+                        Toast.makeText(Login.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
 
                     }
                     else {
-                        regPassword.setError("Wrong Password!");
-                        regPassword.requestFocus();
+                        password.setError("Wrong Password!");
+                        password.requestFocus();
                     }
                 }
                 else {
-                    regUsername.setError("No such User exists");
-                    regUsername.requestFocus();
+                    username.setError("No such User exists");
+                    username.requestFocus();
                 }
-
-                Intent intent = new Intent(Login.this, MainActivity2.class);
-                startActivity(intent);
-                Toast.makeText(Login.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override

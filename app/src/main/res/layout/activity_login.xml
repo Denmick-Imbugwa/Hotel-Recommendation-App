@@ -49,9 +49,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/username"
-            app:startIconDrawable="@drawable/ic_baseline_create_24"
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Username">
+            android:hint="Phone Number">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
